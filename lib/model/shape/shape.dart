@@ -11,6 +11,8 @@ class Shape {
 
   void draw(Canvas canvas) {}
 
+  void setPaint(Paint newPaint) {}
+
   Shape init() {
     return Shape();
   }

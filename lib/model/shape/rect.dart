@@ -21,6 +21,11 @@ class Rectangle extends Shape {
   }
 
   @override
+  void setPaint(Paint newPaint) {
+    currentPaint = newPaint;
+  }
+
+  @override
   void updateCurrent(Offset nextPoint) {
     end = nextPoint;
   }

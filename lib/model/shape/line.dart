@@ -34,6 +34,11 @@ class Line extends Shape {
   }
 
   @override
+  void setPaint(Paint newPaint) {
+    currentPaint = newPaint;
+  }
+
+  @override
   Shape init() {
     return Line(currentPaint);
   }

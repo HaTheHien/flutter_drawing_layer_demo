@@ -39,6 +39,11 @@ class NoShape extends Shape {
   }
 
   @override
+  void setPaint(Paint newPaint) {
+    currentPaint = newPaint;
+  }
+
+  @override
   Shape init() {
     return NoShape(currentPaint);
   }

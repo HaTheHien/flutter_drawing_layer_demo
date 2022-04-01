@@ -52,6 +52,7 @@ class PainterController extends ChangeNotifier {
   void _updatePaint() {
     Paint paint = getCurrentPaint();
     _pathHistory.currentPaint = paint;
+    _pathHistory.currentShape.setPaint(paint);
     _pathHistory.setBackgroundColor(backgroundColor);
     notifyListeners();
   }

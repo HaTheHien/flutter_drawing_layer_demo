@@ -39,6 +39,11 @@ class Circle extends Shape {
   }
 
   @override
+  void setPaint(Paint newPaint) {
+    currentPaint = newPaint;
+  }
+
+  @override
   Shape init() {
     return Circle(currentPaint);
   }
