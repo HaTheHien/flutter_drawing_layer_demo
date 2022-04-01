@@ -47,9 +47,4 @@ class Circle extends Shape {
   Shape init() {
     return Circle(currentPaint);
   }
-
-  @override
-  bool isRemoveUpdate() {
-    return true;
-  }
 }

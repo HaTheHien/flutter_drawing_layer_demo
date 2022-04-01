@@ -63,9 +63,7 @@ class PathHistory {
 
   void updateCurrent(Offset nextPoint) {
     if (_inDrag) {
-      if (currentShape.isRemoveUpdate()) {
-        _paths.removeLast();
-      }
+      _paths.removeLast();
       currentShape.updateCurrent(nextPoint);
       _paths.add(currentShape);
     }

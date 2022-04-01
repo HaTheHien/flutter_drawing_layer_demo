@@ -16,8 +16,4 @@ class Shape {
   Shape init() {
     return Shape();
   }
-
-  bool isRemoveUpdate() {
-    return false;
-  }
 }

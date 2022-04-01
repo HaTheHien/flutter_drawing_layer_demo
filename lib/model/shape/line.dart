@@ -42,9 +42,4 @@ class Line extends Shape {
   Shape init() {
     return Line(currentPaint);
   }
-
-  @override
-  bool isRemoveUpdate() {
-    return true;
-  }
 }

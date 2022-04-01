@@ -44,9 +44,4 @@ class Rectangle extends Shape {
   Shape init() {
     return Rectangle(currentPaint);
   }
-
-  @override
-  bool isRemoveUpdate() {
-    return true;
-  }
 }

@@ -45,9 +45,4 @@ class Oval extends Shape {
   Shape init() {
     return Oval(currentPaint);
   }
-
-  @override
-  bool isRemoveUpdate() {
-    return true;
-  }
 }

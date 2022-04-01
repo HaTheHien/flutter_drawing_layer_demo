@@ -47,9 +47,4 @@ class NoShape extends Shape {
   Shape init() {
     return NoShape(currentPaint);
   }
-
-  @override
-  bool isRemoveUpdate() {
-    return false;
-  }
 }
