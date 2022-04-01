@@ -1,16 +1,22 @@
 import 'dart:ui';
 
 import 'package:drawing/model/list_point.dart';
+import 'package:drawing/model/shape/circle.dart';
+import 'package:drawing/model/shape/noShape.dart';
+import 'package:drawing/model/shape/oval.dart';
+import 'package:drawing/model/shape/rect.dart';
+import 'package:drawing/model/shape/shape.dart';
 import 'package:flutter/material.dart';
 
 class PathHistory {
-  late List<MapEntry<ListPoint, Paint>> _paths;
+  late List<Shape> _paths;
   late Paint currentPaint;
   late Paint _backgroundPaint;
   late bool _inDrag;
+  late Shape currentShape;
 
   PathHistory() {
-    _paths = <MapEntry<ListPoint, Paint>>[];
+    _paths = [];
     _inDrag = false;
     _backgroundPaint = Paint()
       ..color = Colors.white
@@ -20,6 +26,11 @@ class PathHistory {
       ..color = Colors.black
       ..strokeCap = StrokeCap.round
       ..strokeWidth = 10;
+    currentShape = NoShape(currentPaint);
+  }
+
+  void setCurrentShape(Shape newShape) {
+    currentShape = newShape;
   }
 
   void setBackgroundColor(Color backgroundColor) {
@@ -45,21 +56,25 @@ class PathHistory {
   void add(Offset startPoint) {
     if (!_inDrag) {
       _inDrag = true;
-      ListPoint list = ListPoint();
-      list.add(startPoint);
-      _paths.add(MapEntry<ListPoint, Paint>(list, currentPaint));
+      currentShape.add(startPoint);
+      _paths.add(currentShape);
     }
   }
 
   void updateCurrent(Offset nextPoint) {
     if (_inDrag) {
-      ListPoint list = _paths.last.key;
-      list.add(nextPoint);
+      if (currentShape.isRemoveUpdate()) {
+        _paths.removeLast();
+      }
+      currentShape.updateCurrent(nextPoint);
+      _paths.add(currentShape);
     }
   }
 
   void endCurrent() {
     _inDrag = false;
+    currentShape.endCurrent();
+    currentShape = currentShape.init();
   }
 
   void draw(Canvas canvas, Size size) {
@@ -68,16 +83,8 @@ class PathHistory {
         Rect.fromLTWH(0.0, 0.0, size.width, size.height), _backgroundPaint);
 
     // draw all again (use in undo)
-    for (MapEntry<ListPoint, Paint> path in _paths) {
-      Offset? temp;
-      for (var element in path.key.getList) {
-        if (temp == null) {
-          temp = element;
-        } else {
-          canvas.drawLine(temp, element, path.value);
-          temp = element;
-        }
-      }
+    for (var element in _paths) {
+      element.draw(canvas);
     }
   }
 }

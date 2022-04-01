@@ -1,4 +1,5 @@
 import 'package:drawing/model/path_history.dart';
+import 'package:drawing/model/shape/shape.dart';
 import 'package:flutter/material.dart';
 
 class PainterController extends ChangeNotifier {
@@ -36,11 +37,20 @@ class PainterController extends ChangeNotifier {
     _updatePaint();
   }
 
-  void _updatePaint() {
+  set shape(Shape newShape) {
+    _pathHistory.setCurrentShape(newShape);
+  }
+
+  Paint getCurrentPaint() {
     Paint paint = Paint();
     paint.color = drawColor;
     paint.style = PaintingStyle.stroke;
     paint.strokeWidth = thickness;
+    return paint;
+  }
+
+  void _updatePaint() {
+    Paint paint = getCurrentPaint();
     _pathHistory.currentPaint = paint;
     _pathHistory.setBackgroundColor(backgroundColor);
     notifyListeners();
