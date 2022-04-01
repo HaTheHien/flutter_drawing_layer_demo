@@ -1,3 +1,4 @@
+import 'package:drawing/widget/bottom_bar.dart';
 import 'package:drawing/widget/custom_painter.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +24,7 @@ class HomeScreen extends StatelessWidget {
               alignment: Alignment.center,
               child: Icon(Icons.close)),
         ),
-        title: Text(
+        title: const Text(
           "Draw",
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
         ),
@@ -32,6 +33,7 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         children: <Widget>[paintScreen(context)],
       ),
+      bottomSheet: BottomToolBar(),
     );
   }
 }

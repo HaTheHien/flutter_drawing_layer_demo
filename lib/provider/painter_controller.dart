@@ -4,14 +4,17 @@ import 'package:flutter/material.dart';
 
 class PainterController extends ChangeNotifier {
   Color _drawColor = Colors.yellow;
-  Color _backgroundColor = new Color.fromARGB(255, 255, 255, 255);
+  Color _backgroundColor = Color.fromARGB(255, 255, 255, 255);
 
-  double _thickness = 1.0;
+  double _thickness = 10;
   late PathHistory _pathHistory;
   late ValueGetter<Size> _widgetFinish;
 
   PainterController() {
     _pathHistory = PathHistory();
+    _pathHistory.setDrawColor(_drawColor);
+    _pathHistory.setBackgroundColor(_backgroundColor);
+    _pathHistory.currentPaint = getCurrentPaint();
   }
 
   Color get drawColor => _drawColor;
@@ -44,16 +47,16 @@ class PainterController extends ChangeNotifier {
   Paint getCurrentPaint() {
     Paint paint = Paint();
     paint.color = drawColor;
-    paint.style = PaintingStyle.stroke;
     paint.strokeWidth = thickness;
+    paint.strokeCap = StrokeCap.round;
     return paint;
   }
 
   void _updatePaint() {
     Paint paint = getCurrentPaint();
-    _pathHistory.currentPaint = paint;
-    _pathHistory.currentShape.setPaint(paint);
     _pathHistory.setBackgroundColor(backgroundColor);
+    _pathHistory.currentShape.setPaint(paint);
+    _pathHistory.currentPaint = paint;
     notifyListeners();
   }
 
