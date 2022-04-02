@@ -37,6 +37,16 @@ dependencies:
   provider: ^6.0.2
   flutter_colorpicker: ^1.0.3
 
+  # Allows resizing and repositioning the window containing the Flutter content, as well as querying
+  # screen information
+  # This is a prototype, and in the long term is expected to be replaced by functionality within
+  # the Flutter framework.
+  # (c) Apache-2.0 License.
+  window_size:
+    git:
+      url: https://github.com/google/flutter-desktop-embedding.git
+      path: plugins/window_size
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

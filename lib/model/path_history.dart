@@ -1,10 +1,6 @@
 import 'dart:ui';
 
-import 'package:drawing/model/list_point.dart';
-import 'package:drawing/model/shape/circle.dart';
-import 'package:drawing/model/shape/noShape.dart';
-import 'package:drawing/model/shape/oval.dart';
-import 'package:drawing/model/shape/rect.dart';
+import 'package:drawing/model/shape/no_shape.dart';
 import 'package:drawing/model/shape/shape.dart';
 import 'package:flutter/material.dart';
 

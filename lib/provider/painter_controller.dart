@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class PainterController extends ChangeNotifier {
   Color _drawColor = Colors.yellow;
-  Color _backgroundColor = Color.fromARGB(255, 255, 255, 255);
+  Color _backgroundColor = const Color.fromARGB(255, 255, 255, 255);
 
   double _thickness = 10;
   late PathHistory _pathHistory;

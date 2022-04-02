@@ -1,14 +1,18 @@
 import 'package:drawing/provider/painter_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:provider/provider.dart';
 
 class BottomToolBar extends StatefulWidget {
+  const BottomToolBar({Key? key}) : super(key: key);
+
   @override
   _BottomToolBarState createState() => _BottomToolBarState();
 }
 
 class _BottomToolBarState extends State<BottomToolBar> {
+  static const iconSize = 32.0;
+
   late PainterController painterController;
   Color selectedColor = Colors.black;
 
@@ -20,75 +24,84 @@ class _BottomToolBarState extends State<BottomToolBar> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
-      height: 50,
-      color: Colors.white,
+      color: theme.colorScheme.surface,
+      height: 80,
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Row(
-        children: <Widget>[
-          Container(
-            height: 50,
-            color: Colors.white,
-            child: Slider(
-              value: painterController.thickness,
-              onChanged: (thickness) {
-                setState(() {
-                  painterController.thickness = thickness;
-                });
-              },
-              min: 3.0,
-              max: 25.0,
+        children: [
+          Expanded(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text('Thickness'),
+                Expanded(
+                  child: Slider.adaptive(
+                    value: painterController.thickness,
+                    onChanged: (thickness) => setState(() {
+                      painterController.thickness = thickness;
+                    }),
+                    label: painterController.thickness.round().toString(),
+                    min: 1,
+                    max: 40,
+                  ),
+                ),
+              ],
             ),
           ),
           IconButton(
-              icon: Icon(
-                Icons.color_lens,
-                color: selectedColor,
-              ),
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Color Chooser'),
-                        content: SingleChildScrollView(
-                          child: BlockPicker(
-                            pickerColor: selectedColor,
-                            onColorChanged: (color) {
-                              setState(() {
-                                selectedColor = color;
-                                painterController.drawColor = color;
-                              });
-                            },
-                          ),
-                        ),
-                        actions: <Widget>[
-                          FlatButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: Text("Close"))
-                        ],
-                      );
-                    });
-              }),
+            iconSize: iconSize,
+            icon: Icon(
+              Icons.color_lens_outlined,
+              color: selectedColor,
+              size: iconSize,
+            ),
+            onPressed: () => showDialog(
+              context: context,
+              builder: buildChooseColourDialog,
+            ),
+          ),
           IconButton(
-              icon: const Icon(
-                Icons.undo,
-                color: Colors.blue,
-              ),
-              onPressed: () {
-                painterController.undo();
-              }),
+            iconSize: iconSize,
+            icon: const Icon(
+              Icons.undo_outlined,
+              // color: theme.primaryColor,
+            ),
+            onPressed: () => painterController.undo(),
+          ),
           IconButton(
-              icon: const Icon(
-                Icons.layers_clear,
-                color: Colors.blue,
-              ),
-              onPressed: () {
-                painterController.clear();
-              }),
+            iconSize: iconSize,
+            icon: const Icon(
+              Icons.layers_clear_outlined,
+              // color: theme.primaryColor,
+            ),
+            onPressed: () => painterController.clear(),
+          ),
         ],
       ),
+    );
+  }
+
+  Widget buildChooseColourDialog(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Choose a colour'),
+      content: SingleChildScrollView(
+        child: BlockPicker(
+          pickerColor: selectedColor,
+          onColorChanged: (color) => setState(() {
+            selectedColor = color;
+            painterController.drawColor = color;
+          }),
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text("OK"),
+        ),
+      ],
     );
   }
 }

@@ -1,9 +1,17 @@
+import 'dart:io';
+
 import 'package:drawing/provider/painter_controller.dart';
 import 'package:drawing/screen/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:window_size/window_size.dart';
 
 void main() {
+
+  if (Platform.isLinux || Platform.isMacOS || Platform.isWindows) {
+    setWindowMinSize(const Size(600, 750));
+  }
+
   runApp(
     MultiProvider(
       providers: [
@@ -26,7 +34,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomeScreen(),
+      home: const HomeScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

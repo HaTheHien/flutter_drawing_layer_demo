@@ -33,12 +33,15 @@ class _PainterState extends State<Painter> {
             onPanEnd: _onPanEnd,
             child: SizedBox.expand(
               child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  child: CustomPaint(
-                    willChange: true,
-                    painter: _PainterPainter(painterController.getPathHistory,
-                        repaint: painterController),
-                  )),
+                borderRadius: const BorderRadius.all(Radius.circular(20.0)),
+                child: CustomPaint(
+                  willChange: true,
+                  painter: _PainterPainter(
+                    painterController.getPathHistory,
+                    repaint: painterController,
+                  ),
+                ),
+              ),
             ),
           ),
         ),
