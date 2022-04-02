@@ -9,16 +9,6 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // leading: InkWell(
-        //   onTap: () {
-        //     Navigator.pop(context);
-        //   },
-        //   child: Container(
-        //     padding: const EdgeInsets.symmetric(horizontal: 16),
-        //     alignment: Alignment.center,
-        //     child: const Icon(Icons.close),
-        //   ),
-        // ),
         title: const Text(
           "Draw",
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),

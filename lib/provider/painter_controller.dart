@@ -11,10 +11,10 @@ class PainterController extends ChangeNotifier {
   late ValueGetter<Size> _widgetFinish;
 
   PainterController() {
-    _pathHistory = PathHistory();
-    _pathHistory.setDrawColor(_drawColor);
-    _pathHistory.setBackgroundColor(_backgroundColor);
-    _pathHistory.currentPaint = getCurrentPaint();
+    _pathHistory = PathHistory()
+      ..setDrawColor(_drawColor)
+      ..setBackgroundColor(_backgroundColor)
+      ..currentPaint = getCurrentPaint();
   }
 
   Color get drawColor => _drawColor;

@@ -35,7 +35,6 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   provider: ^6.0.2
-  flutter_colorpicker: ^1.0.3
 
   # Allows resizing and repositioning the window containing the Flutter content, as well as querying
   # screen information
@@ -46,6 +45,10 @@ dependencies:
     git:
       url: https://github.com/google/flutter-desktop-embedding.git
       path: plugins/window_size
+
+  # FlexColorPicker is a customizable color picker for Flutter
+  # (c) BSD-3-Clause License. By Mike Rydstrom.
+  flex_color_picker: ^2.3.1
 
 dev_dependencies:
   flutter_test:

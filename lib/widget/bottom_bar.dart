@@ -1,7 +1,16 @@
+import 'package:drawing/model/enums/shape_option.dart';
+import 'package:drawing/model/shape/circle.dart';
+import 'package:drawing/model/shape/line.dart';
+import 'package:drawing/model/shape/no_shape.dart';
 import 'package:drawing/provider/painter_controller.dart';
+import 'package:drawing/widget/shape_chooser.dart';
+import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:provider/provider.dart';
+
+import '../model/shape/oval.dart';
+import '../model/shape/rect.dart';
+import '../model/shape/shape.dart';
 
 class BottomToolBar extends StatefulWidget {
   const BottomToolBar({Key? key}) : super(key: key);
@@ -15,6 +24,7 @@ class _BottomToolBarState extends State<BottomToolBar> {
 
   late PainterController painterController;
   Color selectedColor = Colors.black;
+  ShapeOption selectedShape = ShapeOption.none;
 
   @override
   void initState() {
@@ -51,6 +61,17 @@ class _BottomToolBarState extends State<BottomToolBar> {
               ],
             ),
           ),
+          ShapeChooser(
+            currentShape: selectedShape,
+            onSelected: (value) {
+              setState(() {
+                selectedShape = value;
+              });
+              painterController.shape = value.getShape(
+                painterController.getCurrentPaint(),
+              );
+            },
+          ),
           IconButton(
             iconSize: iconSize,
             icon: Icon(
@@ -58,10 +79,7 @@ class _BottomToolBarState extends State<BottomToolBar> {
               color: selectedColor,
               size: iconSize,
             ),
-            onPressed: () => showDialog(
-              context: context,
-              builder: buildChooseColourDialog,
-            ),
+            onPressed: () => colorPickerDialog(context),
           ),
           IconButton(
             iconSize: iconSize,
@@ -84,24 +102,67 @@ class _BottomToolBarState extends State<BottomToolBar> {
     );
   }
 
-  Widget buildChooseColourDialog(BuildContext context) {
-    return AlertDialog(
-      title: const Text('Choose a colour'),
-      content: SingleChildScrollView(
-        child: BlockPicker(
-          pickerColor: selectedColor,
-          onColorChanged: (color) => setState(() {
-            selectedColor = color;
-            painterController.drawColor = color;
-          }),
-        ),
+  Future<bool> colorPickerDialog(BuildContext context) async {
+    return ColorPicker(
+      // Use the dialogPickerColor as start color.
+      color: selectedColor,
+      // Update the dialogPickerColor using the callback.
+      onColorChanged: (color) => setState(() {
+        selectedColor = color;
+        painterController.drawColor = color;
+      }),
+      width: 40,
+      height: 40,
+      borderRadius: 4,
+      spacing: 5,
+      runSpacing: 5,
+      wheelDiameter: 155,
+      heading: Text(
+        'Select color',
+        style: Theme.of(context).textTheme.subtitle1,
       ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(),
-          child: const Text("OK"),
-        ),
-      ],
-    );
+      subheading: Text(
+        'Select color shade',
+        style: Theme.of(context).textTheme.subtitle1,
+      ),
+      wheelSubheading: Text(
+        'Selected color and its shades',
+        style: Theme.of(context).textTheme.subtitle1,
+      ),
+      showMaterialName: true,
+      showColorName: true,
+      showColorCode: true,
+      copyPasteBehavior: const ColorPickerCopyPasteBehavior(
+        longPressMenu: true,
+      ),
+      materialNameTextStyle: Theme.of(context).textTheme.caption,
+      colorNameTextStyle: Theme.of(context).textTheme.caption,
+      colorCodeTextStyle: Theme.of(context).textTheme.caption,
+      pickersEnabled: const <ColorPickerType, bool>{
+        ColorPickerType.both: false,
+        ColorPickerType.primary: true,
+        ColorPickerType.accent: true,
+        ColorPickerType.bw: false,
+        ColorPickerType.custom: true,
+        ColorPickerType.wheel: true,
+      },
+    ).showPickerDialog(context);
+  }
+}
+
+extension ShapeOptionX on ShapeOption {
+  Shape getShape(Paint paint) {
+    switch (this) {
+      case ShapeOption.none:
+        return NoShape(paint);
+      case ShapeOption.line:
+        return Line(paint);
+      case ShapeOption.circle:
+        return Circle(paint);
+      case ShapeOption.oval:
+        return Oval(paint);
+      case ShapeOption.rectangle:
+        return Rectangle(paint);
+    }
   }
 }
