@@ -47,14 +47,15 @@ class PacmanPainter extends CustomPainter {
     final pacmanShadowPath = Path()
       ..moveTo(size.width / 2, size.height / 2)
       ..arcTo(
-          Rect.fromCenter(
-            center: centerOffset.translate(8, 0),
-            width: pacmanRadius * 2 + 8,
-            height: pacmanRadius * 2 + 8,
-          ),
-          pacmanMouthAngleDegree * pi / 180, // radian
-          2 * pi - pacmanMouthAngleDegree * 2 * pi / 180,
-          false)
+        Rect.fromCenter(
+          center: centerOffset.translate(8, 0),
+          width: pacmanRadius * 2 + 8,
+          height: pacmanRadius * 2 + 8,
+        ),
+        pacmanMouthAngleDegree * pi / 180, // radian
+        2 * pi - pacmanMouthAngleDegree * 2 * pi / 180,
+        false,
+      )
       ..close();
 
     canvas

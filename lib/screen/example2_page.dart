@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../widget/example2/face_tab.dart';
 import '../widget/example2/pacman_tab.dart';
 
 class Example2Page extends StatelessWidget {
@@ -7,10 +8,12 @@ class Example2Page extends StatelessWidget {
 
   static const tabViews = [
     PacmanTab(),
+    FaceTab(),
   ];
 
   static const tabLabels = [
     Tab(text: '84436\'s pacman'),
+    Tab(text: 'Lena Forsén'),
   ];
 
   @override
