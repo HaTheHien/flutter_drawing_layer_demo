@@ -1,16 +1,16 @@
-import '../model/enums/shape_option.dart';
-import '../model/shape/circle.dart';
-import '../model/shape/line.dart';
-import '../model/shape/no_shape.dart';
-import '../provider/painter_controller.dart';
-import 'shape_chooser.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../model/shape/oval.dart';
-import '../model/shape/rect.dart';
-import '../model/shape/shape.dart';
+import '../../model/enums/shape_option.dart';
+import '../../model/shape/circle.dart';
+import '../../model/shape/line.dart';
+import '../../model/shape/no_shape.dart';
+import '../../model/shape/oval.dart';
+import '../../model/shape/rect.dart';
+import '../../model/shape/shape.dart';
+import '../../provider/painter_controller.dart';
+import 'shape_chooser.dart';
 
 class BottomToolBar extends StatefulWidget {
   const BottomToolBar({Key? key}) : super(key: key);

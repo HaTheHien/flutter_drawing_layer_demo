@@ -1,6 +1,6 @@
-import 'package:drawing/model/list_point.dart';
-import 'package:flutter/material.dart';
 import 'dart:ui';
+
+import 'package:flutter/material.dart';
 
 class Shape {
   void add(Offset startPoint) {}

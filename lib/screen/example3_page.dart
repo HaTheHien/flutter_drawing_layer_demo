@@ -1,9 +1,9 @@
-import 'package:drawing/widget/bottom_bar.dart';
-import 'package:drawing/widget/custom_painter.dart';
+import '../widget/example_3/bottom_bar.dart';
+import '../widget/example_3/custom_painter.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class Example3Page extends StatelessWidget {
+  const Example3Page({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

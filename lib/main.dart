@@ -1,10 +1,11 @@
 import 'dart:io';
 
-import 'package:drawing/provider/painter_controller.dart';
-import 'package:drawing/screen/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:window_size/window_size.dart';
+
+import 'provider/painter_controller.dart';
+import 'screen/example2_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,22 +21,24 @@ void main() {
           create: (_) => PainterController(),
         ),
       ],
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         fontFamily: 'Poppins',
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.indigo,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const HomeScreen(),
+      home: const Example2Page(),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:drawing/model/shape/shape.dart';
 import 'package:flutter/material.dart';
 

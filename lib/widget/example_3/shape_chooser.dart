@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../model/enums/shape_option.dart';
+import '../../model/enums/shape_option.dart';
 
 class ShapeChooser extends StatelessWidget {
   final ShapeOption currentShape;
