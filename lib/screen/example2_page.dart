@@ -26,6 +26,7 @@ class Example2Page extends StatelessWidget {
       body: DefaultTabController(
         length: tabViews.length,
         child: NestedScrollView(
+          physics: const NeverScrollableScrollPhysics(),
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
             SliverToBoxAdapter(
               child: Container(

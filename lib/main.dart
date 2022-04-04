@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:window_size/window_size.dart';
 
 import 'provider/painter_controller.dart';
-import 'screen/example2_page.dart';
+import 'screen/home_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.indigo,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const Example2Page(),
+      home: const HomePage(),
       debugShowCheckedModeBanner: false,
     );
   }
