@@ -1,5 +1,5 @@
-import '../widget/example_3/bottom_bar.dart';
-import '../widget/example_3/custom_painter.dart';
+import '../widget/example3/bottom_bar.dart';
+import '../widget/example3/custom_painter.dart';
 import 'package:flutter/material.dart';
 
 class Example3Page extends StatelessWidget {

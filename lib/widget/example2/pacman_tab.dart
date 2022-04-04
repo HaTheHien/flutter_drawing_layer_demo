@@ -26,7 +26,7 @@ class PacmanPainter extends CustomPainter {
       ..color = const Color(0xFF383838);
 
     final radius = min(size.width / 2, size.height / 2);
-    final pacmanRadius = min(size.width / 4, size.height / 4);
+    final pacmanRadius = min(size.width / 3.5, size.height / 3.5);
 
     final centerOffset = Offset(size.width / 2, size.height / 2);
 
@@ -43,17 +43,20 @@ class PacmanPainter extends CustomPainter {
       );
 
     const pacmanMouthAngleDegree = 45;
+    const pacmanMouthStartAngle = pacmanMouthAngleDegree * pi / 180;
+    const pacmanMouthSweepAngle =
+        2 * pi - pacmanMouthAngleDegree * 2 * pi / 180;
 
     final pacmanShadowPath = Path()
       ..moveTo(size.width / 2, size.height / 2)
       ..arcTo(
         Rect.fromCenter(
-          center: centerOffset.translate(8, 0),
-          width: pacmanRadius * 2 + 8,
-          height: pacmanRadius * 2 + 8,
+          center: centerOffset.translate(20, -8),
+          width: pacmanRadius * 2,
+          height: pacmanRadius * 2,
         ),
-        pacmanMouthAngleDegree * pi / 180, // radian
-        2 * pi - pacmanMouthAngleDegree * 2 * pi / 180,
+        pacmanMouthStartAngle, // radian
+        pacmanMouthSweepAngle,
         false,
       )
       ..close();
@@ -69,15 +72,15 @@ class PacmanPainter extends CustomPainter {
       //   pacmanRadius,
       //   pacmanPaint,
       // );
-      ..drawShadow(pacmanShadowPath, Colors.black, 8, false)
+      ..drawShadow(pacmanShadowPath, Colors.black, 12, false)
       ..drawArc(
         Rect.fromCenter(
           center: centerOffset,
           width: pacmanRadius * 2,
           height: pacmanRadius * 2,
         ),
-        45 * pi / 180, // radian
-        2 * pi - 90 * pi / 180,
+        pacmanMouthStartAngle, // radian
+        pacmanMouthSweepAngle,
         true,
         pacmanPaint,
       );

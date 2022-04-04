@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../widget/example4/example4_view.dart';
 import '../widget/home/home_card.dart';
 import 'example1_page.dart';
 import 'example2_page.dart';
 import 'example3_page.dart';
+import 'example4_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -36,6 +38,15 @@ class HomePage extends StatelessWidget {
         onTapped: () => Navigator.push(
           context,
           MaterialPageRoute(builder: (_) => const Example3Page()),
+        ),
+      ),
+      HomeCard(
+        order: 3,
+        title: 'Painter with animation',
+        description: '',
+        onTapped: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const Example4Page()),
         ),
       ),
     ];
