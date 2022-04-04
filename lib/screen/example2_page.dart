@@ -1,35 +1,23 @@
 import 'package:flutter/material.dart';
 
-import '../../widget/example1/draw_circle_tab.dart';
-import '../../widget/example1/draw_curve1_tab.dart';
-import '../../widget/example1/draw_curve2_tab.dart';
-import '../../widget/example1/draw_line_tab.dart';
-import '../../widget/example1/draw_rect_tab.dart';
+import '../widget/example2/pacman_tab.dart';
 
-class Example1Page extends StatelessWidget {
-  const Example1Page({Key? key}) : super(key: key);
+class Example2Page extends StatelessWidget {
+  const Example2Page({Key? key}) : super(key: key);
 
   static const tabViews = [
-    DrawLineTab(),
-    DrawRectTab(),
-    DrawCircleTab(),
-    DrawCurve1Tab(),
-    DrawCurve2Tab(),
+    PacmanTab(),
   ];
 
   static const tabLabels = [
-    Tab(text: 'Line'),
-    Tab(text: 'Rectangle'),
-    Tab(text: 'Circle'),
-    Tab(text: 'Curve'),
-    Tab(text: 'Curve'),
+    Tab(text: '84436\'s pacman'),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Basic shapes playground'),
+        title: const Text('Drawing playground'),
         elevation: 0,
       ),
       body: DefaultTabController(

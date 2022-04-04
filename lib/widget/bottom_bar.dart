@@ -1,9 +1,9 @@
-import 'package:drawing/model/enums/shape_option.dart';
-import 'package:drawing/model/shape/circle.dart';
-import 'package:drawing/model/shape/line.dart';
-import 'package:drawing/model/shape/no_shape.dart';
-import 'package:drawing/provider/painter_controller.dart';
-import 'package:drawing/widget/shape_chooser.dart';
+import '../model/enums/shape_option.dart';
+import '../model/shape/circle.dart';
+import '../model/shape/line.dart';
+import '../model/shape/no_shape.dart';
+import '../provider/painter_controller.dart';
+import 'shape_chooser.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
