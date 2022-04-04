@@ -54,7 +54,7 @@ class FacePainter extends CustomPainter {
     );
 
     canvas
-      ..drawColor(Colors.blue, BlendMode.src)
+      // ..drawColor(Colors.blue, BlendMode.src)
       ..drawImage(image, Offset.zero, paint)
       ..drawRect(facePosition, paint);
   }

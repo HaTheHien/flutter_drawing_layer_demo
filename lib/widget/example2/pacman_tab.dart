@@ -36,10 +36,16 @@ class PacmanPainter extends CustomPainter {
           Color(0xFFFFFFFF),
           Color(0xFF999999),
         ],
-        center: Alignment(0, 0.25),
+        center: Alignment.centerLeft,
         radius: 1,
+        // focalRadius: 0.7,
+        // stops: [0.05, 1],
       ).createShader(
-        Offset.zero & (size / 2),
+        Rect.fromCenter(
+          center: centerOffset,
+          width: pacmanRadius * 2,
+          height: pacmanRadius * 2,
+        ),
       );
 
     const pacmanMouthAngleDegree = 45;
@@ -51,7 +57,7 @@ class PacmanPainter extends CustomPainter {
       ..moveTo(size.width / 2, size.height / 2)
       ..arcTo(
         Rect.fromCenter(
-          center: centerOffset.translate(20, -8),
+          center: centerOffset.translate(8, 0),
           width: pacmanRadius * 2,
           height: pacmanRadius * 2,
         ),
@@ -72,7 +78,7 @@ class PacmanPainter extends CustomPainter {
       //   pacmanRadius,
       //   pacmanPaint,
       // );
-      ..drawShadow(pacmanShadowPath, Colors.black, 12, false)
+      ..drawShadow(pacmanShadowPath, Colors.black, 20, false)
       ..drawArc(
         Rect.fromCenter(
           center: centerOffset,

@@ -24,20 +24,26 @@ class _Example4ViewState extends State<Example4View>
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final appSize = MediaQuery.of(context).size;
+    final size = min(3 * appSize.width / 4, 3 * appSize.height / 4);
     return Center(
       child: CustomPaint(
         painter: CirclePainter(
           animationController,
           color: Colors.red,
         ),
-        child: SizedBox(
-          width: 2 * size.width / 3,
-          height: 2 * size.height / 3,
-          child: Icon(
-            Icons.cell_tower,
-            color: Colors.white,
-            size: min(size.width, size.height) / 12,
+        child: GestureDetector(
+          onTap: () {
+
+          },
+          child: SizedBox(
+            width: size,
+            height: size,
+            child: Icon(
+              Icons.cell_tower,
+              color: Colors.white,
+              size: size / 12,
+            ),
           ),
         ),
       ),
@@ -59,20 +65,21 @@ class CirclePainter extends CustomPainter {
 
   final Animation<double> animation;
   final Color color;
+  static const nWaves = 3;
 
   @override
   void paint(Canvas canvas, Size size) {
     final Rect rect = Rect.fromLTRB(0, 0, size.width, size.height);
-    for (var wave = 3; wave >= 0; wave--) {
+    for (var wave = nWaves - 1; wave >= 0; wave--) {
       drawCircle(canvas, rect, wave + animation.value);
     }
   }
 
   void drawCircle(Canvas canvas, Rect rect, double value) {
-    final double opacity = (1 - (value / 4)).clamp(0, 1);
+    final double opacity = (1 - (value / nWaves)).clamp(0, 1);
     final size = rect.width / 2;
     final area = size * size;
-    final radius = sqrt(area * value / 4);
+    final radius = sqrt(area * value / nWaves);
 
     final paint = Paint()..color = color.withOpacity(opacity);
 

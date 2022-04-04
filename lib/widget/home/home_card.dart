@@ -37,6 +37,7 @@ class HomeCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ListTile(
+                dense: true,
                 leading: Text(
                   '${order + 1}',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -53,6 +54,7 @@ class HomeCard extends StatelessWidget {
               ),
               if (description.isNotEmpty) ...[
                 ListTile(
+                  dense: true,
                   leading: const SizedBox(),
                   title: Text(
                     description,
