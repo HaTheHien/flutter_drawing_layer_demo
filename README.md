@@ -1,6 +1,12 @@
-# drawing
+# CustomPaint in flutter
 
-A new Flutter project.
+<p align="center">
+    <img src="assets/home.png" width="250" alt="home page of the app"/>
+    <img src="assets/example2_1.png" width="250" alt="home page of the app"/>
+    <img src="assets/example2_2.png" width="250" alt="home page of the app"/>
+</p>
+
+This app contains several examples to demonstrate the usage of `CustomPaint` widget in flutter.
 
 ## Getting Started
 
