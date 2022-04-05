@@ -5,6 +5,7 @@ import '../widget/example1/draw_curve1_tab.dart';
 import '../widget/example1/draw_curve2_tab.dart';
 import '../widget/example1/draw_line_tab.dart';
 import '../widget/example1/draw_rect_tab.dart';
+import '../widget/example1/draw_text_tab.dart';
 
 class Example1Page extends StatelessWidget {
   const Example1Page({Key? key}) : super(key: key);
@@ -15,6 +16,7 @@ class Example1Page extends StatelessWidget {
     DrawCircleTab(),
     DrawCurve1Tab(),
     DrawCurve2Tab(),
+    DrawTextTab(),
   ];
 
   static const tabLabels = [
@@ -23,6 +25,7 @@ class Example1Page extends StatelessWidget {
     Tab(text: 'Circle'),
     Tab(text: 'Curve'),
     Tab(text: 'Curve'),
+    Tab(text: 'Text'),
   ];
 
   @override
