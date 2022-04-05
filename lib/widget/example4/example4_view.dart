@@ -32,18 +32,13 @@ class _Example4ViewState extends State<Example4View>
           animationController,
           color: Colors.red,
         ),
-        child: GestureDetector(
-          onTap: () {
-
-          },
-          child: SizedBox(
-            width: size,
-            height: size,
-            child: Icon(
-              Icons.cell_tower,
-              color: Colors.white,
-              size: size / 12,
-            ),
+        child: SizedBox(
+          width: size,
+          height: size,
+          child: Icon(
+            Icons.cell_tower,
+            color: Colors.white,
+            size: size / 12,
           ),
         ),
       ),

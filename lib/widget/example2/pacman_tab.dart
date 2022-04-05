@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class PacmanTab extends StatelessWidget {
   const PacmanTab({Key? key}) : super(key: key);
@@ -18,6 +19,30 @@ class PacmanTab extends StatelessWidget {
 }
 
 class PacmanPainter extends CustomPainter {
+  double _getPacmanRadius(Size size) => size.shortestSide / 3.5;
+
+  /// Create a rectangle representing the bound of pacman shape from given
+  /// size and center offset.
+  ///
+  /// @param size the size of canvas
+  /// @param center given center, if the value is null, the center vlaue of
+  /// size is used.
+  ///
+  /// @return Rect object
+  Rect _getPacmanRect(Size size, {Offset? center}) {
+    final Offset pacmanOffset;
+    if (center == null) {
+      pacmanOffset = Offset(size.width / 2, size.height / 2);
+    } else {
+      pacmanOffset = center;
+    }
+
+    return Rect.fromCircle(
+      center: pacmanOffset,
+      radius: _getPacmanRadius(size),
+    );
+  }
+
   @override
   void paint(Canvas canvas, Size size) {
     final foregroundPaint = Paint()
@@ -25,9 +50,7 @@ class PacmanPainter extends CustomPainter {
       ..style = PaintingStyle.fill
       ..color = const Color(0xFF383838);
 
-    final radius = min(size.width / 2, size.height / 2);
-    final pacmanRadius = min(size.width / 3.5, size.height / 3.5);
-
+    final backgroundRadius = min(size.width / 2, size.height / 2);
     final centerOffset = Offset(size.width / 2, size.height / 2);
 
     final pacmanPaint = Paint()
@@ -38,15 +61,7 @@ class PacmanPainter extends CustomPainter {
         ],
         center: Alignment.centerLeft,
         radius: 1,
-        // focalRadius: 0.7,
-        // stops: [0.05, 1],
-      ).createShader(
-        Rect.fromCenter(
-          center: centerOffset,
-          width: pacmanRadius * 2,
-          height: pacmanRadius * 2,
-        ),
-      );
+      ).createShader(_getPacmanRect(size));
 
     const pacmanMouthAngleDegree = 45;
     const pacmanMouthStartAngle = pacmanMouthAngleDegree * pi / 180;
@@ -56,11 +71,7 @@ class PacmanPainter extends CustomPainter {
     final pacmanShadowPath = Path()
       ..moveTo(size.width / 2, size.height / 2)
       ..arcTo(
-        Rect.fromCenter(
-          center: centerOffset.translate(8, 0),
-          width: pacmanRadius * 2,
-          height: pacmanRadius * 2,
-        ),
+        _getPacmanRect(size, center: centerOffset.translate(8, 0)),
         pacmanMouthStartAngle, // radian
         pacmanMouthSweepAngle,
         false,
@@ -70,7 +81,7 @@ class PacmanPainter extends CustomPainter {
     canvas
       ..drawCircle(
         centerOffset,
-        radius,
+        backgroundRadius,
         foregroundPaint,
       )
       // ..drawCircle(
@@ -78,13 +89,9 @@ class PacmanPainter extends CustomPainter {
       //   pacmanRadius,
       //   pacmanPaint,
       // );
-      ..drawShadow(pacmanShadowPath, Colors.black, 20, false)
+      ..drawShadow(pacmanShadowPath, Colors.black, 20, true)
       ..drawArc(
-        Rect.fromCenter(
-          center: centerOffset,
-          width: pacmanRadius * 2,
-          height: pacmanRadius * 2,
-        ),
+        _getPacmanRect(size),
         pacmanMouthStartAngle, // radian
         pacmanMouthSweepAngle,
         true,
@@ -95,4 +102,21 @@ class PacmanPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+
+  @override
+  bool shouldRebuildSemantics(covariant CustomPainter oldDelegate) => false;
+
+  @override
+  SemanticsBuilderCallback? get semanticsBuilder => (Size size) {
+        final pacmanRect = _getPacmanRect(size);
+        return <CustomPainterSemantics>[
+          CustomPainterSemantics(
+            rect: pacmanRect,
+            properties: const SemanticsProperties(
+              label: 'Pacman',
+              textDirection: TextDirection.ltr,
+            ),
+          ),
+        ];
+      };
 }

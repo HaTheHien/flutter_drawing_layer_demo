@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../widget/example4/example4_view.dart';
 import '../widget/home/home_card.dart';
 import 'example1_page.dart';
 import 'example2_page.dart';
@@ -16,7 +15,8 @@ class HomePage extends StatelessWidget {
       HomeCard(
         order: 0,
         title: 'Basic shape playground',
-        description: 'Draw simple shapes using default drawing methods',
+        description: 'Draw simple shapes using default drawing methods such as '
+            'line, circle, rectangle, etc.',
         onTapped: () => Navigator.push(
           context,
           MaterialPageRoute(builder: (_) => const Example1Page()),
@@ -25,7 +25,8 @@ class HomePage extends StatelessWidget {
       HomeCard(
         order: 1,
         title: 'Drawing playground',
-        description: 'Draw more complex shapes',
+        description: 'Draw more complex shapes from simple shapes,'
+            'with more fancy painter & advanced properties (semantic builder)',
         onTapped: () => Navigator.push(
           context,
           MaterialPageRoute(builder: (_) => const Example2Page()),
@@ -42,7 +43,7 @@ class HomePage extends StatelessWidget {
       ),
       HomeCard(
         order: 3,
-        title: 'Painter with animation',
+        title: 'CustomPainter with simple animation',
         description: '',
         onTapped: () => Navigator.push(
           context,
